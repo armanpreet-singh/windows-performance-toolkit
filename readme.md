@@ -18,6 +18,60 @@ Unlike many tweak packs, this repository focuses on **understanding each optimiz
 
 ---
 
+# ✨ Features
+
+## 🖥️ Windows Optimization
+
+- Registry Tweaks
+- Startup Optimization
+- Service Optimization
+- System Cleanup
+- Driver Cleanup
+- Power Plan Configuration
+
+---
+
+## 🌐 Networking
+
+- Network Optimization
+- Latency Reduction
+- DNS Configuration
+- TCP/IP Tweaks
+
+---
+
+## ⚡ Performance
+
+- CPU Optimization
+- GPU Optimization
+- Memory Optimization
+- Timer Resolution
+- Storage Optimization
+
+---
+
+## 🛠 Utilities
+
+- Startup Managers
+- Cleanup Utilities
+- Monitoring Tools
+- Privacy Tools
+- System Information Tools
+
+---
+
+## 📚 Documentation
+
+Every optimization includes:
+
+- 📖 Explanation
+- 🎯 Purpose
+- ⚠️ Risks
+- 🔄 Rollback Instructions
+- 💡 Best Practices
+
+---
+
 ## ⚠️ Disclaimer
 
 This repository contains system-level tweaks that may affect Windows behavior.
