@@ -38,3 +38,37 @@ Use everything at your own risk.
 This repository is currently under active development.
 
 The goal is to build one of the most comprehensive and well-documented Windows optimization toolkits on GitHub.
+
+---
+
+# 📚 Documentation
+
+## Getting Started
+
+- 📖 [Installation Guide](docs/Installation.md)
+- 🔄 [Restore Guide](docs/Restore.md)
+- ❓ [FAQ](docs/FAQ.md)
+- 🛠️ [Troubleshooting](docs/Troubleshooting.md)
+- 📊 [Benchmarks](docs/Benchmarks.md)
+- 🙏 [Credits](docs/Credits.md)
+
+---
+
+## Applications
+
+- 🚀 [AutoRuns](docs/apps/AutoRuns.md)
+
+---
+
+## Coming Soon
+
+- QuickCPU
+- Mem Reduct
+- MSI Mode Utility
+- O&O ShutUp10++
+- Device Cleanup
+- WPD
+- Registry Tweaks
+- Networking Tweaks
+- Power Plans
+- Cleanup Scripts
