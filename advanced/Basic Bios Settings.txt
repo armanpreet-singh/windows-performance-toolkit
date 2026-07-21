@@ -1,0 +1,54 @@
+STANDARD INTEL BIOS SETTINGS:
+--------------------------------
+
+Extreme Memory Profile (XMP) --> Enabled
+Loads the RAM’s rated speed/timings.
+
+Active E-Cores --> 0
+Turns off efficiency cores (bad for all games except COD)
+
+Hyper-Threading --> Disabled
+One thread per core for cleaner latency. HT is very bad for Intel on 99% of games.
+
+Intel Adaptive Thermal Monitor --> Disabled
+Stops Intel’s thermal throttling behavior.
+
+Intel C-State --> Disabled
+Prevents cores from sleeping / lower input delay.
+
+Re-size BAR support --> Enabled
+Lets GPU access full VRAM for better performance.
+
+PCIe Native Power Management --> Disabled
+Stops PCIe power-saving.
+
+Native ASPM --> Disabled
+Prevents PCIe link power changes that add latency.
+
+-----------------------------------------------------
+-----------------------------------------------------
+-----------------------------------------------------
+
+
+STANDARD AM5 / RYZEN BIOS SETTINGS:
+-------------------------------------
+AI Overclock Tuner --> Enabled EXPO I
+Loads RAM’s rated speed/timings.
+
+Power Down State --> Disable
+Helps prevent RAM training bugs, more stable boots.
+
+Memory Context Restore --> Disabled
+Helps prevent RAM training bugs, more stable boots.
+
+UCLK DIV1 MODE --> UCLK = MEMCLK
+1:1 memory controller ratio / lowest latency possible. Make sure you're on 6000 or 6200mhz.
+
+POC Sample PD --> Disabled
+Stops power-down sampling / steadier timings.
+
+Above 4G Decoding & Resizeable Bar Support --> Enabled
+Enables GPU access optimizations.
+
+SMT --> Enabled
+This is Ryzen's version of HT but extremely more optimized. Enable it.
