@@ -36,9 +36,20 @@ These tools help reduce clutter caused by temporary files, Windows Update downlo
 
 # Safety
 
-🟢 Safe for most users.
+Some cleanup operations permanently delete files. Review each script before running it.
 
-Review the Advanced Cleaner script before running it.
+## Delete Temporary Files.cmd
+
+This script uses the current user's `%TEMP%` value and removes only the contents of that directory. It does not take ownership of folders, change permissions, or delete the target directory itself.
+
+- Run `cleanup\Delete Temporary Files.cmd /dry-run` from Command Prompt to preview the target directories.
+- Run the script normally and confirm the prompt to perform cleanup.
+- The user temp directory can be cleaned without administrator privileges.
+- `%SystemRoot%\Temp` is cleaned only when the Command Prompt is elevated.
+- Files that are locked or inaccessible are skipped.
+- The script refuses to clean a drive root or the Windows directory.
+
+Other cleanup scripts in this repository have different behavior and must be reviewed individually. In particular, the Advanced Cleaner and LOGS ERASER scripts perform broader system cleanup and should not be treated as equivalent to this guarded script.
 
 ---
 
