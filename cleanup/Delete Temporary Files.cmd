@@ -13,7 +13,13 @@ if not defined TEMP (
 
 for %%I in ("%TEMP%") do set "USER_TEMP=%%~fI"
 for %%I in ("%USER_TEMP%") do set "USER_TEMP_DRIVE=%%~dI"
+for %%I in ("%USER_TEMP%") do set "USER_TEMP_NAME=%%~nxI"
 for %%I in ("%SystemRoot%") do set "SYSTEM_ROOT=%%~fI"
+
+if not defined SystemRoot (
+    echo ERROR: SystemRoot is not defined. Refusing to continue.
+    exit /b 1
+)
 
 if not defined USER_TEMP (
     echo ERROR: The user temporary directory could not be resolved.
@@ -28,6 +34,29 @@ if /I "%USER_TEMP%"=="%USER_TEMP_DRIVE%\" (
 if /I "%USER_TEMP%"=="%SYSTEM_ROOT%" (
     echo ERROR: Refusing to clean the Windows directory: "%USER_TEMP%"
     exit /b 1
+)
+
+if /I "%USER_TEMP%"=="%USERPROFILE%" (
+    echo ERROR: Refusing to clean the user profile root: "%USER_TEMP%"
+    exit /b 1
+)
+
+if /I not "%USER_TEMP_NAME%"=="Temp" (
+    echo ERROR: The TEMP path must end in a folder named Temp.
+    echo Resolved path: "%USER_TEMP%"
+    exit /b 1
+)
+
+if "%DRY_RUN%"=="0" (
+    echo.
+    echo This will remove the contents of:
+    echo   "%USER_TEMP%"
+    echo   "%SystemRoot%\Temp" if this window is elevated.
+    choice /C YN /N /M "Continue? [Y/N] "
+    if errorlevel 2 (
+        echo Cleanup cancelled.
+        exit /b 0
+    )
 )
 
 if not exist "%USER_TEMP%\" (
