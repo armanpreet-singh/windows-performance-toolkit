@@ -56,3 +56,5 @@ jobs:
           } finally {
             $env:TEMP = $originalTemp
           }
+
+          exit 0
