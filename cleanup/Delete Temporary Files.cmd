@@ -4,7 +4,11 @@ setlocal EnableExtensions
 title Safe Temporary File Cleanup
 
 set "DRY_RUN=0"
+set "NO_PAUSE=0"
 if /I "%~1"=="/dry-run" set "DRY_RUN=1"
+if /I "%~2"=="/dry-run" set "DRY_RUN=1"
+if /I "%~1"=="/no-pause" set "NO_PAUSE=1"
+if /I "%~2"=="/no-pause" set "NO_PAUSE=1"
 
 if not defined TEMP (
     echo ERROR: The TEMP environment variable is not defined.
@@ -88,7 +92,7 @@ if "%DRY_RUN%"=="1" (
     echo Cleanup finished. Files in use or inaccessible were left untouched.
 )
 echo.
-pause
+if "%NO_PAUSE%"=="0" pause
 exit /b 0
 
 :CleanDirectory
