@@ -1,0 +1,58 @@
+name: Cleanup Script Safety Checks
+
+on:
+  pull_request:
+    paths:
+      - "cleanup/Delete Temporary Files.cmd"
+      - "cleanup/readme.md"
+      - ".github/workflows/cleanup-safety.yml"
+  push:
+    branches:
+      - main
+
+jobs:
+  dry-run-and-path-guards:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify dry-run does not delete files
+        shell: pwsh
+        run: |
+          $sentinel = Join-Path $env:TEMP "windows-toolkit-cleanup-dry-run-sentinel.txt"
+          Set-Content -LiteralPath $sentinel -Value "keep-me"
+          try {
+            & $env:ComSpec /c '"cleanup\Delete Temporary Files.cmd" /dry-run /no-pause'
+            if ($LASTEXITCODE -ne 0) {
+              throw "The cleanup dry-run command failed with exit code $LASTEXITCODE."
+            }
+            if (-not (Test-Path -LiteralPath $sentinel)) {
+              throw "Dry-run removed a file from TEMP."
+            }
+          } finally {
+            Remove-Item -LiteralPath $sentinel -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Reject unsafe TEMP targets
+        shell: pwsh
+        run: |
+          $scriptCommand = '"cleanup\Delete Temporary Files.cmd" /dry-run /no-pause'
+          $originalTemp = $env:TEMP
+          try {
+            $unsafeTargets = @(
+              ($env:SystemDrive + '\'),
+              $env:SystemRoot,
+              $env:USERPROFILE
+            )
+
+            foreach ($target in $unsafeTargets) {
+              $env:TEMP = $target
+              & $env:ComSpec /c $scriptCommand
+              if ($LASTEXITCODE -eq 0) {
+                throw "The cleanup script accepted an unsafe TEMP target: $target"
+              }
+            }
+          } finally {
+            $env:TEMP = $originalTemp
+          }
